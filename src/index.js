@@ -1,14 +1,15 @@
 import React    from 'react'
 import ReactDOM from 'react-dom'
 
-import { createStore } from 'redux'
-import { Provider }    from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider }    									from 'react-redux'
 
-import App 				  from './containers/App'
-import reducers from './reducers'
+import App 				  		 from './containers/App'
+import reducers 			   from './reducers'
+import callAPIMiddleware from './middlewares/api'
 
-
-let store = createStore(reducers);
+let createStoreWithMiddleware = applyMiddleware(callAPIMiddleware)(createStore)
+let store = createStoreWithMiddleware(reducers)
 let rootDOM = document.getElementById('root')
 
 ReactDOM.render(

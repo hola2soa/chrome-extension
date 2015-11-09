@@ -1,0 +1,27 @@
+{
+  "name": "queenshop-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base",
+    "test": "NODE_ENV=test"
+  },
+  "author": "hiEven",
+  "license": "MIT",
+  "dependencies": {
+    "keymirror": "^0.1.1",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "babel-core": "^5.8.33",
+    "babel-loader": "^5.3.3",
+    "babel-polyfill": "^6.0.16",
+    "webpack": "^1.12.3"
+  }
+}

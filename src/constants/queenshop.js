@@ -1,0 +1,5 @@
+export default {
+	FETCH_QUEENSHOP_HOT: null,
+	FETCH_QUEENSHOP_HOT_SUCCESS: null,
+	FETCH_QUEENSHOP_HOT_FAIL: null
+};

@@ -1,19 +1,15 @@
 import React, {Component, PropTypes} from 'react'
-import {Link}                        from 'react-router'
 import {connect}                     from 'react-redux'
 
 import {fetchQueenshopHot} from '../actions/queenshop'
 
 class App extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired
+  };
 
   constructor(props) {
     super(props)
-
-    this.fetch = this.fetch.bind(this)
-  }
-
-  fetch() {
-    this.props.dispatch(fetchQueenshopHot())
   }
 
   render() {
@@ -21,10 +17,13 @@ class App extends Component {
       <div>
         <p>queenshop</p>
         <button onClick={this.fetch}>click!!!</button>
-        <Link to='/yo'>app</Link>
         {this.props.children}
       </div>
     );
+  }
+
+  fetch = () => {
+    this.props.dispatch(fetchQueenshopHot(10))
   }
 };
 

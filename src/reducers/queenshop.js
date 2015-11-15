@@ -1,18 +1,10 @@
-import {
-	FETCH_QUEENSHOP_HOT,
-	FETCH_QUEENSHOP_HOT_SUCCESS,
-	FETCH_QUEENSHOP_HOT_FAIL
-} from '../constants'
+import {handleActions} from 'redux-actions'
+import {ActionTypes}   from '../constants'
 
-const initialState = [];
+const initialState = []
 
-export default function queenshop(state = initialState, action) {
-	switch (action.type) {
-		case FETCH_QUEENSHOP_HOT: 
-			console.log('reducer: FETCH_QUEENSHOP_HOT')
-			return state
-		default:
-			console.log('reducer: default')
-			return state
+export default handleActions({
+	[ActionTypes.FETCH_QUEENSHOP_HOT]: (state, action) => {
+		return state
 	}
-}
+}, initialState)

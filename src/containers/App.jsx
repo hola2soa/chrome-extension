@@ -1,11 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import {connect}                     from 'react-redux'
+import React, {PropTypes} from 'react'
 
-import {fetchQueenshopHot} from '../actions/queenshop'
-
-class App extends Component {
+class App extends React.Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -16,15 +12,10 @@ class App extends Component {
     return (
       <div>
         <p>queenshop</p>
-        <button onClick={this.fetch}>click!!!</button>
         {this.props.children}
       </div>
     );
   }
-
-  fetch = () => {
-    this.props.dispatch(fetchQueenshopHot(10))
-  }
 };
 
-export default connect()(App)
+export default App

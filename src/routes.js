@@ -1,11 +1,16 @@
-import App from './containers/App'
+import App      from './containers/App'
+import HomePage from './containers/HomePage'
 
-export default {
-  component: App,
+export default function getRoutes(store) {
+
+  return {
+    component: App,
     childRoutes: [
       {
         path: '/',
-        component: App
+        component: HomePage,
+        onEnter: HomePage.onEnter(store)
       },
     ]
+  }
 }

@@ -6,7 +6,7 @@ import {Router}              from 'react-router'
 import {syncReduxAndRouter}  from 'redux-simple-router'
 import {createMemoryHistory} from 'history'
 
-import routes         from './routes'
+import getRoutes      from './routes'
 import configureStore from './store/configureStore'
 
 let store   = configureStore();
@@ -20,7 +20,7 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          {routes}
+          {getRoutes(store)}
         </Router>
       </Provider>
     );

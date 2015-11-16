@@ -1,7 +1,9 @@
 import {handleActions} from 'redux-actions'
-import {ActionTypes}   from '../constants'
+import {OrderedMap}    from 'immutable'
 
-const initialState = []
+import {ActionTypes} from '../constants'
+
+const initialState = OrderedMap()
 
 export default handleActions({
 	[ActionTypes.FETCH_QUEENSHOP_HOT]: {

@@ -4,12 +4,13 @@ import {connect}          from 'react-redux'
 import {fetchQueenshopHot} from '../actions/queenshop'
 
 @connect(state => ({
-
+  items: state
 }), {
   fetchQueenshopHot
 })
 class HomePage extends React.Component {
   static propTypes = {
+    items: PropTypes.object
   }
 
   render() {

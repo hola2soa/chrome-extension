@@ -1,8 +1,13 @@
-import {createStore} from 'redux'
+import {devTools, persistState} from 'redux-devtools'
 
-import middlewares from './middlewares'
-import reducers    from '../reducers'
+import composeStore from './composeStore'
 
 export default function configureStore() {
-  return middlewares(createStore)(reducers)
+
+  const store = composeStore(
+    devTools(),
+    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+  )
+
+  return store
 }

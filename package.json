@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --inline --hot --content-base build/",
     "test": "NODE_ENV=test"
   },
   "author": "hiEven",
@@ -31,6 +31,7 @@
     "babel-polyfill": "^6.0.16",
     "eslint": "^1.9.0",
     "eslint-plugin-react": "^3.8.0",
+    "redux-devtools": "^2.1.5",
     "webpack": "^1.12.3"
   }
 }

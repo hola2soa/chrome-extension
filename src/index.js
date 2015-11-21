@@ -8,6 +8,7 @@ import {createMemoryHistory} from 'history'
 
 import getRoutes      from './routes'
 import configureStore from './store/configureStore'
+import Devtools       from './components/Devtools'
 
 let store   = configureStore();
 let history = createMemoryHistory()
@@ -18,11 +19,14 @@ syncReduxAndRouter(history, store)
 class Root extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router history={history}>
-          {getRoutes(store)}
-        </Router>
-      </Provider>
+      <div>
+        <Provider store={store}>
+          <Router history={history}>
+            {getRoutes(store)}
+          </Router>
+        </Provider>
+        <Devtools store={store}/>
+      </div>
     );
   }
 }

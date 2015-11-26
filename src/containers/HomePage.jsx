@@ -4,7 +4,7 @@ import {connect}          from 'react-redux'
 import {fetchQueenshopHot} from '../actions/queenshop'
 
 @connect(state => ({
-  items: state
+  items: state.queenshop.store
 }), {
   fetchQueenshopHot
 })
@@ -14,9 +14,17 @@ class HomePage extends React.Component {
   }
 
   render() {
+    let {items} = this.props
+    items = items.toArray()
     return (
       <div>
         <p>Home page</p>
+        {items.map(item => (
+          <div>
+            <p>{item.title}</p>
+            <p>{item.price}</p>
+          </div>
+        ))}
       </div>
     )
   }

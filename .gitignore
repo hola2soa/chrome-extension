@@ -3,3 +3,6 @@ build/*.js
 node_modules/
 *.log
 .idea
+config/*
+!config/default.json
+!config/index.js

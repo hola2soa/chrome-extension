@@ -1,28 +1,28 @@
-import {handleActions} from 'redux-actions'
-import {OrderedMap}    from 'immutable'
+import {handleActions} from 'redux-actions';
+import {OrderedMap}    from 'immutable';
 
-import {ActionTypes}   from '../constants'
+import {ActionTypes}   from '../constants';
 
 const initialState = {
   store: OrderedMap()
-}
+};
 
 export default handleActions({
-	[ActionTypes.FETCH_QUEENSHOP_HOT]: {
-  		next(state, action) {
+  [ActionTypes.FETCH_QUEENSHOP_HOT]: {
+    next(state, action) {
 
-			return {
+      return {
         ...state,
         store: state.store.withMutations(map => {
           action.payload.forEach((item, index) => {
-            map.set(index, item)
-          })
+            map.set(index, item);
+          });
         })
-      }
-		},
+      };
+    },
 
-		throw(state, action) {
-			return state
-		}
-	}
-}, initialState)
+    throw(state) {
+      return state;
+    }
+  }
+}, initialState);

@@ -1,5 +1,5 @@
-import App      from './containers/App'
-import HomePage from './containers/HomePage'
+import App      from './containers/App';
+import HomePage from './containers/HomePage';
 
 export default function getRoutes(store) {
 
@@ -10,7 +10,7 @@ export default function getRoutes(store) {
         path: '/',
         component: HomePage,
         onEnter: HomePage.onEnter(store)
-      },
+      }
     ]
-  }
+  };
 }

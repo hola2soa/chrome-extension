@@ -1,21 +1,18 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
 
 class App extends React.Component {
-  static propTypes = {
-  }
 
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
     return (
       <div>
-        <p>queenshop</p>
         {this.props.children}
       </div>
     );
   }
 };
 
-export default App
+export default App;

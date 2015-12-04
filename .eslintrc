@@ -2,6 +2,7 @@
   "parser": "babel-eslint",
   "root": true,
   "rules": {
+    "semi": [2, "always"],
     "no-console": 0,
     "no-var": 2,
     "no-path-concat": 2,

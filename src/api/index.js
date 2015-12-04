@@ -1,2 +1,2 @@
-export {api}     from './request'
-export parseJSON from './parseJSON'
+export {api}     from './request';
+export parseJSON from './parseJSON';

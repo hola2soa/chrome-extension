@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- node
+- '4.1'
+env:
+- CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+cache:
+  apt: true
+  directories: node_modules
+before_script: npm run build
+script: npm run lint
+notifications:
+  slack:
+    secure: lYbcY2Y4eELbtPtQ+d/+PxX8z8BD10Xug8Xj7RC6Jt9ImXGRCtBiqLVVbwraXsCB47nbR1+QqC04NlIYCEToHkes1ksFgeikeqykNazHHOq1ifL3aDpjgevb/oWHSrNxDgh/qB/o1fIT7ZV6p2pVi6Xjx3NqSg/XLkIidZfQbb1pPsEIFNeL8dDYdRnwD9j4IpqUKtSpKP04bk9221mBbAvZx2WvuV0d0p2/7yu6rKF78JTG5TKrG+X01pFkzWE0VPGpoffFjLzh7RhoOhZSujeQRsbIOwWPRhij7CxPRMo8+wnpvHWDIqBOijuBrAQMiI/UZo0Z5zXPM59EGy0SQokJH4gdfoeq0uA04iDnUOHRo1gBzWmJZgb4fuM1sBPSBEnMRE5wDHDpYetmuv1VH30wF7YRNKNmpuaDWqrAaPrar+5aH+S3gR/JFjk2A259dk8fY9rT73XCm/pl1hIGy6PTL7v6WP/3xVoqQGIKBtmV1G13HJpw8uziAxivuVSp8flZAEQjbC1tuJjzbvXxm12hpA+qOdtjyPFbv/oKktjCa18YUh1/rdtgpxipXU6l9G5WVmkW3QpY1OG8G7E6e5HsjlIE/5s9dd/tNcMhc8m0TGlE4BI3xG2KTDUbo7ZlqJ6jDMhJRJtEnU4lk90quFlBMRLq6Xyk5gm7iikmN58=

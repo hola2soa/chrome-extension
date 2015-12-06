@@ -1,18 +1,27 @@
-//const Express = require('express')
-const webpack = require('webpack')
-const webpackDevServer = require('webpack-dev-server')
+const path    = require('path');
+const express = require('express');
+const webpack = require('webpack');
+const config  = require('./development.config');
 
-const config = require('./dev.config')
-const compiler = webpack(config)
+const app      = express();
+const compiler = webpack(config);
 
-const server = new webpackDevServer(compiler, {
-  contentBase: './build',
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
 
-  hot: true,
-  inline: true,
-  stats: { colors: true },
-})
+app.use(require('webpack-hot-middleware')(compiler));
 
-server.listen(4000, function() {
-  console.log('webpack server listening!');
-})
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
+app.listen(4000, 'localhost', function(err) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  console.log('Listening at http://localhost:4000');
+});

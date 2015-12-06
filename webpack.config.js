@@ -1,22 +1,4 @@
-const path = require('path')
+const env = process.env.NODE_ENV || 'development';
+const config = require(`./webpack/${env}.config`);
 
-module.exports = {
-  entry: [
-  	'./src/index.js'
-  ],
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  module: {
-    loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, query: { stage: 0 } },
-      { test: /\.json$/, loader: 'json' }
-    ]
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
-  }
-}
+module.exports = config;

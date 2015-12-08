@@ -1,4 +1,5 @@
 # Queenshop Chrome Extension
+[![Build Status](https://travis-ci.org/hola2soa/chrome-extension.svg?branch=master)](https://travis-ci.org/hola2soa/chrome-extension)
 
 This is a team project
 

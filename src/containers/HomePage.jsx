@@ -3,6 +3,12 @@ import {connect}          from 'react-redux';
 
 import {fetchQueenshopHot} from '../actions/queenshop';
 
+import Navbar   from '../components/Home/Navbar';
+import Aside    from '../components/Home/Aside';
+import Showcase from '../components/Home/Showcase';
+
+import '../styles/HomePage.styl';
+
 @connect(state => ({
   items: state.queenshop.store
 }), {
@@ -17,14 +23,10 @@ class HomePage extends React.Component {
     const {items} = this.props;
 
     return (
-      <div>
-        <p>Home page</p>
-        {items.map(item => (
-          <div>
-            <p>{item.title}</p>
-            <p>{item.price}</p>
-          </div>
-        ))}
+      <div className='container-fluid'>
+        <Navbar />
+        <Aside />
+        <Showcase items={items} />
       </div>
     );
   }

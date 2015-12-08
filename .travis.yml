@@ -18,6 +18,10 @@ cache:
   apt: true
   directories: node_modules
 
+install:
+  - npm install
+  - cp config/travis.json config/test.json
+
 before_script: npm run build
 
 script:

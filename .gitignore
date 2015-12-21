@@ -1,4 +1,5 @@
 build/*.js
+build/*.map
 .DS_Store
 node_modules/
 *.log

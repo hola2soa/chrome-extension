@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
 import {connect}          from 'react-redux';
+import {replacePath}      from 'redux-simple-router';
 
 import {fetchQueenshopHot} from '../actions/queenshop';
 
-import Navbar   from '../components/Home/Navbar';
 import Aside    from '../components/Home/Aside';
 import Showcase from '../components/Home/Showcase';
 
@@ -24,7 +24,7 @@ class HomePage extends React.Component {
 
     return (
       <div className='container-fluid'>
-        <Navbar />
+
         <Aside />
         <Showcase items={items} />
       </div>
@@ -33,6 +33,8 @@ class HomePage extends React.Component {
 }
 
 HomePage.onEnter = (store) => (nextState, replaceState, callback) => {
+  if (!localStorage.name) return store.dispatch(replacePath('/welcome', nextState));
+
   store.dispatch(fetchQueenshopHot()).then(() => callback(), callback);
 };
 

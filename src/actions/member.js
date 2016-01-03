@@ -3,13 +3,13 @@ import {ActionTypes}    from '../constants';
 
 export const getMember = createAction(ActionTypes.MEMBER_GET, () => (
   {
-    name: localStorage.name
+    ...JSON.parse(localStorage.getItem('member'))
   }
 ));
 
 export const createMember = createAction(ActionTypes.MEMBER_CREATE, (data) => (
   new Promise((resolve) => {
-    localStorage.name = data.name;
+    localStorage.setItem('member', JSON.stringify(data));
     resolve(data);
   })
 ));

@@ -8,7 +8,7 @@
     "no-path-concat": 2,
     "handle-callback-err": 2,
     "no-use-before-define": [2, "nofunc"],
-    "no-undefined": 2,
+    "no-undefined": 0,
     "no-shadow-restricted-names": 2,
     "block-scoped-var": 2,
     "dot-notation": 2,

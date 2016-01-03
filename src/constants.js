@@ -6,3 +6,7 @@ export const ActionTypes = keyMirror({
   MEMBER_GET: null,
   MEMBER_CREATE: null
 });
+
+export const Shops = keyMirror({
+  QUEENSHOP: null
+});

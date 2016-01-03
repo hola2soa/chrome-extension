@@ -27,6 +27,9 @@ export default class MemberForm extends React.Component {
           <input type='text' placeholder='First Name' {...name}/>
           {name.touched && name.error}
         </div>
+        <button onClick={handleSubmit}>
+          Submit
+        </button>
       </form>
     );
   }

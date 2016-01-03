@@ -25,4 +25,7 @@ module.exports = {
       { test: /\.(png|jpg)$/, loader: 'url?limit=25000' }
     ]
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.json']
+  }
 };

@@ -1,7 +1,8 @@
-import {createValidator, required} from '../../utils/validation';
+import {createValidator, required, isEmail} from '../../utils/validation';
 
 const memberValidator = createValidator({
-  name: [required]
+  name:  [required],
+  email: [required, isEmail]
 });
 
 export default memberValidator;

@@ -5,7 +5,7 @@ import memberValidator    from './memberValidator';
 
 @reduxForm({
   form: 'member',
-  fields: ['name'],
+  fields: ['name', 'email'],
   validate: memberValidator
 })
 export default class MemberForm extends React.Component {
@@ -16,7 +16,7 @@ export default class MemberForm extends React.Component {
 
   render() {
     const {
-      fields: {name},
+      fields: {name, email},
       handleSubmit
     } = this.props;
 
@@ -24,8 +24,13 @@ export default class MemberForm extends React.Component {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
-          <input type='text' placeholder='First Name' {...name}/>
+          <input type='text' {...name}/>
           {name.touched && name.error}
+        </div>
+        <div>
+          <label>Email</label>
+          <input type='text' {...email}/>
+          {email.touched && email.error}
         </div>
         <button onClick={handleSubmit}>
           Submit

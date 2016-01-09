@@ -6,26 +6,30 @@ import {isEmpty}          from 'lodash/lang';
 import {fetchQueenshopHot} from '../actions/queenshop';
 import {getMember}         from '../actions/member';
 
+import Navbar   from '../components/Home/Navbar';
 import Aside    from '../components/Home/Aside';
 import Showcase from '../components/Home/Showcase';
 
 import '../styles/HomePage.styl';
 
 @connect(state => ({
+  member: state.member.store,
   items: state.queenshop.store
 }), {
   fetchQueenshopHot
 })
 class HomePage extends React.Component {
   static propTypes = {
-    items: PropTypes.object
+    member: PropTypes.object.isRequired,
+    items: PropTypes.object.isRequired
   }
 
   render() {
-    const {items} = this.props;
+    const {member, items} = this.props;
 
     return (
       <div className='container-fluid'>
+        <Navbar member={member}/>
         <Aside/>
         <Showcase items={items}/>
       </div>

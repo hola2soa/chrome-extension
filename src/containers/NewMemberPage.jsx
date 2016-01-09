@@ -4,7 +4,8 @@ import {pushPath}              from 'redux-simple-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // components
-import MemberForm    from '../components/NewMember/MemberForm';
+import NameForm      from '../components/NewMember/NameForm';
+import EmailForm     from '../components/NewMember/EmailForm';
 import ShopSelection from '../components/NewMember/ShopSelection';
 
 // style
@@ -25,13 +26,23 @@ class NewMemberPage extends React.Component {
     location:     PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      animationEnd: true
+    };
+  }
+
   render() {
+    const item = this.state.animationEnd ? this.renderChildren() : item;
+
     return (
       <ReactCSSTransitionGroup component='div'
+        className='new-member-form container-fluid'
         transitionName='fade'
         transitionEnterTimeout={500}
         transitionLeaveTimeout={500}>
-        {this.renderChildren()}
+        {item}
       </ReactCSSTransitionGroup>
     );
   }
@@ -39,28 +50,44 @@ class NewMemberPage extends React.Component {
   renderChildren = () => {
     const {location: {query: {step}}} = this.props;
     const handlers = {
-      '1': this.handleMemberForm,
-      '2': this.handlerShopSelection
+      '1': this.handleNameForm,
+      '2': this.handleEmailForm,
+      '3': this.handleShopSelection
     };
 
     switch (step) {
       case '1':
-        return <MemberForm key={step} onSubmit={handlers[step]}/>;
+        return <NameForm key={step} onSubmit={handlers[step]} handleAnimationEnd={this.handleAnimationEnd}/>;
       case '2':
+        return <EmailForm key={step} name={this.state.name} onSubmit={handlers[step]} handleAnimationEnd={this.handleAnimationEnd}/>;
+      case '3':
         return <ShopSelection key={step} onSubmit={handlers[step]}/>;
     }
   }
 
-  handleMemberForm = (data) => {
+  handleNameForm = (data) => {
     const {pushPath} = this.props;
-    this.setState({...data}, () => {
+    this.setState({...data, animationEnd: false}, () => {
       pushPath('/members/new?step=2');
     });
   }
 
-  handlerShopSelection = (data) => {
+  handleEmailForm = (data) => {
+    const {pushPath} = this.props;
+    this.setState({...data, animationEnd: false}, () => {
+      pushPath('/members/new?step=3');
+    });
+  }
+
+  handleShopSelection = (data) => {
     this.setState({shops:{...data}}, () => {
       this.register(this.state);
+    });
+  }
+
+  handleAnimationEnd = () => {
+    this.setState({
+      animationEnd: true
     });
   }
 
@@ -70,8 +97,6 @@ class NewMemberPage extends React.Component {
       pushPath('/');
     });
   }
-
-
 }
 
 export default NewMemberPage;

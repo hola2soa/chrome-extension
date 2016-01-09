@@ -1,12 +1,15 @@
 import React, {PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 
+const fields = ['queenshop', 'joyceshop', 'mooncat'];
+
 @reduxForm({
   form:   'shopSelection',
-  fields: ['queenshop', 'joyceshop'],
+  fields: fields,
   initialValues: {
     queenshop: false,
-    joyceshop: false
+    joyceshop: false,
+    mooncat:   false
   }
 })
 export default class ShopSelection extends React.Component {
@@ -16,26 +19,40 @@ export default class ShopSelection extends React.Component {
   };
 
   render() {
-    const {
-      fields: {queenshop, joyceshop},
-      handleSubmit
-    } = this.props;
+    const {handleSubmit} = this.props;
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='shop-selection-form'>
         <div>
-          <label>
-            <input type='checkbox' {...queenshop}/> queenshop
-          </label>
-          <label>
-            <input type='checkbox' {...joyceshop}/> joyceshop
-          </label>
+          {this.renderShops()}
         </div>
-        <button onClick={handleSubmit}>
-          Submit
-        </button>
+        <button onClick={handleSubmit}/>
       </form>
     );
   }
 
+  renderShops = () => {
+    const {fields} = this.props;
+    const labelUrl = 'https://s3-ap-northeast-1.amazonaws.com/e-shopping/shops';
+
+    return Object.keys(fields).map(name => {
+      const field = fields[name];
+
+      return (
+        <span className='shop'>
+          <label htmlFor={name}>
+            <img src={`${labelUrl}/${name}.png`}/>
+          </label>
+          <input id={name} type='checkbox' {...field}/>
+          {this.handleSelect(field.value)}
+        </span>
+      );
+    });
+  }
+
+  handleSelect = (selected) => {
+    if (selected) {
+      return <img className='shop__selected' src='https://s3-ap-northeast-1.amazonaws.com/e-shopping/icon/heart.png'/>;
+    }
+  }
 }

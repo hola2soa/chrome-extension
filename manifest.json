@@ -5,6 +5,7 @@
   "manifest_version": 2,
   "permissions": [
     "http://localhost:3000/**/*",
+    "https://wss-dynamo.herokuapp.com/**/*",
     "tabs",
     "webRequest",
     "webRequestBlocking"

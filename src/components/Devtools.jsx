@@ -14,8 +14,8 @@ class Devtools extends React.Component {
       <DebugPanel top right bottom>
         <DevTools store={store} monitor={LogMonitor} />
       </DebugPanel>
-    )
+    );
   }
 }
 
-export default Devtools
+export default Devtools;

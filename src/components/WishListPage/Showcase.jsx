@@ -2,37 +2,34 @@ import React, {PropTypes} from 'react';
 
 export default class Showcase extends React.Component {
   static propTypes = {
-    items: PropTypes.array.isRequired,
-    pinnedItems: PropTypes.array,
-    pin:   PropTypes.func.isRequired,
+    items: PropTypes.array,
     unpin: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      items: []
-    };
+    const {items} = this.props;
+
+    if (!items.length) {
+      this.state = { items: [] };
+    } else {
+      this.state = {
+        items: items.map(item => Object.assign(item, {
+          preview: item.images[0],
+          pinned: false
+        }))
+      };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const {items, pinnedItems} = nextProps;
+    const {items} = nextProps;
     this.setState({
-      items: items.map(item => {
-        let pinned = false;
-        for (let pinnedItem of pinnedItems) {
-          if (pinnedItem.title === item.title) {
-            pinned = true;
-            break;
-          }
-        };
-
-        return Object.assign(item, {
-          preview: item.images[0],
-          pinned
-        });
-      })
+      items: items.map(item => Object.assign(item, {
+        preview: item.images[0],
+        pinned: false
+      }))
     });
   }
 
@@ -74,21 +71,12 @@ export default class Showcase extends React.Component {
   }
 
   handleClick = (index) => {
-    const {pin, unpin} = this.props;
+    const {unpin} = this.props;
+    unpin(this.state.items[index]);
 
     this.setState(previousState => {
-      const {items} = previousState;
-      const item = items[index];
-
-      if (!item.pinned) {
-        pin(item);
-      } else {
-        unpin(item);
-      }
-
-      items[index].pinned = !items[index].pinned;
-
-      return {items};
+      previousState.items.splice(index, 1);
+      return previousState;
     });
   }
 
@@ -99,8 +87,6 @@ export default class Showcase extends React.Component {
       transform: 'rotateZ(40deg)',
       right: -30,
     };
-    if (item.pinned)
-      return (<img style={imageStyle} onClick={this.handleClick.bind(null, index)} src='https://s3-ap-northeast-1.amazonaws.com/e-shopping/icon/label--blue.png'/>);
-    return (<span style={{position: 'absolute', right: 0}} onClick={this.handleClick.bind(null, index)}>PIN ME</span>);
+    return (<img style={imageStyle} onClick={this.handleClick.bind(null, index)} src='https://s3-ap-northeast-1.amazonaws.com/e-shopping/icon/label--blue.png'/>);
   }
 }

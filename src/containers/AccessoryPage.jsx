@@ -1,9 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect}          from 'react-redux';
-import {replacePath}      from 'redux-simple-router';
 
-import {fetchShop, cleanShop, pin, unpin, fetchPinned} from '../actions/queenshop';
-import {getMember, login}         from '../actions/member';
+import {fetchPart, cleanShop, pin, unpin, fetchPinned} from '../actions/queenshop';
 
 import Navbar   from '../components/Home/Navbar';
 import Aside    from '../components/Home/Aside';
@@ -19,7 +17,7 @@ import '../styles/HomePage.styl';
   pin,
   unpin
 })
-class HomePage extends React.Component {
+class AccessoryPage extends React.Component {
   static propTypes = {
     member: PropTypes.object.isRequired,
     items: PropTypes.array,
@@ -32,7 +30,7 @@ class HomePage extends React.Component {
     const {member, items, pinnedItems} = this.props;
     return (
       <div className='container-fluid'>
-        <Navbar member={member} handleSearch={this.handleSearch}/>
+        <Navbar member={member}/>
         <Aside/>
         <Showcase items={items} pinnedItems={pinnedItems} pin={this.handlePin} unpin={this.handleUnpin}/>
       </div>
@@ -56,24 +54,16 @@ class HomePage extends React.Component {
   }
 }
 
-HomePage.onEnter = (store) => (nextState, replaceState, callback) => {
-  store.dispatch(getMember());
+AccessoryPage.onEnter = (store) => (nextState, replaceState, callback) => {
   const auth = store.getState().member;
-
-  if (!auth.authorized) {
-    return store.dispatch(replacePath('/members/new?step=1', nextState));
-  }
-
-  store.dispatch(login(auth.user.email_address)).then(() => {
-    const tasks = auth.user.stores.map(shop => store.dispatch(fetchShop(shop.name)));
-    tasks.push(store.dispatch(fetchPinned({email_address: auth.user.email_address})));
-    Promise.all(tasks).then();
-  });
+  const tasks = auth.user.stores.map(shop => store.dispatch(fetchPart(shop.name, 'accessories')));
+  tasks.push(store.dispatch(fetchPinned({email_address: auth.user.email_address})));
+  Promise.all(tasks).then();
   callback();
 };
 
-HomePage.onLeave = (store) => () => {
+AccessoryPage.onLeave = (store) => () => {
   store.dispatch(cleanShop());
 };
 
-export default HomePage;
+export default AccessoryPage;

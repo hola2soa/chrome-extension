@@ -8,7 +8,7 @@ import {createMemoryHistory} from 'history';
 
 import getRoutes      from './routes';
 import configureStore from './store/configureStore';
-// import Devtools       from './components/Devtools';
+import Devtools       from './components/Devtools';
 
 let store   = configureStore();
 let history = createMemoryHistory();
@@ -25,6 +25,7 @@ class Root extends Component {
             {getRoutes(store)}
           </Router>
         </Provider>
+        <Devtools store={store}/>
       </div>
     );
   }

@@ -1,12 +1,9 @@
 import React, {PropTypes} from 'react';
 import {reduxForm}        from 'redux-form';
 
-import searchValidator from './searchValidator';
-
 @reduxForm({
   form: 'search',
-  fields: ['keyword', 'min', 'max'],
-  validate: searchValidator
+  fields: ['keyword', 'min', 'max']
 })
 export default class SearchBox extends React.Component {
   static propTypes = {
@@ -21,22 +18,21 @@ export default class SearchBox extends React.Component {
     } = this.props;
 
     return (
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className='search-box'>
+        <div className='search-box--keyword'>
           <input type='text' {...keyword}/>
         </div>
-        <div>
-          <label>min</label>
+        <div className='search-box--min'>
+          <label>$</label>
           <input type='text' {...min}/>
-          {min.touched && min.error}
         </div>
-        <div>
-          <label>max</label>
+        <span className='price-break-line'>~</span>
+        <div className='search-box--max'>
+          <label>$</label>
           <input type='text' {...max}/>
-          {max.touched && max.error}
         </div>
-        <button onClick={handleSubmit}>
-          Submit
+        <button onClick={handleSubmit} className='search-box--submit'>
+          <i className='fa fa-search'></i>
         </button>
       </form>
     );

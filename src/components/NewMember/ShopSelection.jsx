@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 
-const fields = ['queenshop', 'joyceshop', 'mooncat'];
+const fields = ['queenshop', 'joyceshop', 'stylemooncat'];
 
 @reduxForm({
   form:   'shopSelection',
@@ -9,7 +9,7 @@ const fields = ['queenshop', 'joyceshop', 'mooncat'];
   initialValues: {
     queenshop: false,
     joyceshop: false,
-    mooncat:   false
+    stylemooncat:   false
   }
 })
 export default class ShopSelection extends React.Component {

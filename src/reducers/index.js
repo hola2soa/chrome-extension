@@ -4,10 +4,12 @@ import {reducer as formReducer} from 'redux-form';
 
 import queenshop from './queenshop';
 import member    from './member';
+import pin       from './pin';
 
 export default combineReducers({
-  queenshop,
+  clothes: queenshop,
   member,
+  pin,
   routing: routeReducer,
   form:    formReducer
 });
